@@ -43,3 +43,5 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'simple_form', '~> 3.1.0'
+gem 'devise', '~> 3.5.1'
