@@ -21,8 +21,8 @@ class PostsController < ApplicationController
 
   def create
     @category = Category.find(params[:category_id])
+    params.delete(:category_id)
 
- #   @post = current_user.posts.build(post_params)
     @post = @category.posts.new(post_params)
 
     if @post.save
@@ -52,7 +52,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.delete :category_id
     params.require(:post).permit(:title, :content)
   end
 
