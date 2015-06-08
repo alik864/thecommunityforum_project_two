@@ -6,8 +6,11 @@ class PostsController < ApplicationController
 #  before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @posts = Post.all.order("created_at DESC")
-
+    if params[:q]
+      @posts = Post.where(category_id: params[:q]).order("created_at DESC")
+    else
+      @posts = Post.all.order("created_at DESC")
+    end
     render json: @posts
   end
 
@@ -17,8 +20,10 @@ class PostsController < ApplicationController
   end
 
   def create
+    @category = Category.find(params[:category_id])
+
  #   @post = current_user.posts.build(post_params)
-    @post = Post.new(post_params)
+    @post = @category.posts.new(post_params)
 
     if @post.save
       redirect_to @post
@@ -47,6 +52,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
+    params.delete :category_id
     params.require(:post).permit(:title, :content)
   end
 

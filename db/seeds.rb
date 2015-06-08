@@ -15,3 +15,6 @@ Post.create!(title: "Learn yoga", content: "Class is on Monday at 5pm for $23")
 
 Post.create!(title: "Fundraiser for local charity", content: "Email me for more information")
 
+Category.create!(name: "Classes")
+
+Category.create!(name: "Events")
